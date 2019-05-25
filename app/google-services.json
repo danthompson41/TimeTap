@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "174741533241",
+    "firebase_url": "https://timetap-7e216.firebaseio.com",
+    "project_id": "timetap-7e216",
+    "storage_bucket": "timetap-7e216.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174741533241:android:69ce99cdd8955b35",
+        "android_client_info": {
+          "package_name": "com.dthompson.timetap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174741533241-j7bo36924fl10ue4gl8tech6v39i6stk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dthompson.timetap",
+            "certificate_hash": "be3c738582c4de780b6c03c9115617ba9192f61e"
+          }
+        },
+        {
+          "client_id": "174741533241-2egghcvhriucq0gqka9ufgp4asv6megt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN5Wa-elB7AHs9AKq_qpEi-Zs195vAY2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174741533241-2egghcvhriucq0gqka9ufgp4asv6megt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
