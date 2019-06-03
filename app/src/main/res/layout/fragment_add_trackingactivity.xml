@@ -12,7 +12,7 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hey buddo"
+            android:hint="Event Name"
             android:id="@+id/fragment_addEventEditText"
 
     />
@@ -20,7 +20,7 @@
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Heyo"
+            android:text="Save Event"
             android:id="@+id/fragment_addEventbutton"
     />
 

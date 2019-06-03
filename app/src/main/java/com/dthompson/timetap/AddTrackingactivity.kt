@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_trackingactivity.*
@@ -25,10 +27,14 @@ class AddTrackingactivity : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_trackingactivity, container, false)
-//        fragment_addEventbutton.setOnClickListener {
-//            Log.d("ADDEVENTBUTTON", "Hit the button!")
-//            Log.d("ADDEVENTBUTTON", fragment_addEventEditText.text.toString())
-//        }
+        val button = view.findViewById<Button>(R.id.fragment_addEventbutton)
+        val name = view.findViewById<EditText>(R.id.fragment_addEventEditText)
+       button.setOnClickListener {
+            Log.d("ADDEVENTBUTTON", "Hit the button!")
+            Log.d("ADDEVENTBUTTON", name.text.toString())
+            Repository.AddActivity(name.text.toString())
+            getActivity()!!.finish();
+       }
         return view;
     }
 

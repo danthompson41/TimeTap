@@ -25,7 +25,7 @@ var eventsobject: userdata? = null;
 class userdata {
     val events = ArrayList<HashMap<String, kotlin.Any>>();
     val userId: String? = null;
-    val activities = ArrayList<Pair<String, Int>>();
+    val activities = ArrayList<HashMap<String, Int>>();
 }
 
 class MainActivity : AppCompatActivity() {

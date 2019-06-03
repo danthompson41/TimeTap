@@ -16,7 +16,7 @@ class dataModel() {
     val name: String? = null;
     val events = ArrayList<HashMap<String, kotlin.Any>>();
     val uid: String? = null;
-    val activities = ArrayList<Pair<String, Int>>();
+    val activities = ArrayList<HashMap<String, Int>>();
 }
 
 object Repository {
@@ -29,7 +29,7 @@ object Repository {
 
     public fun LoadUser(user: FirebaseUser) {
         if (user == null) {
-
+            Log.d("LOADUSERFAIL", "Loading failed")
         } else {
             val displayName = user.displayName
             if (displayName != null) {
@@ -83,6 +83,18 @@ object Repository {
             logevent.put("StartTime", Calendar.getInstance().getTime())
             Log.d("BUTTONEVENT", logevent.toString());
             userData!!.events.add(logevent);
+            db.collection("users")
+                .document(userData!!.uid!!).set(userData!!, SetOptions.merge())
+        }
+    }
+
+    public fun AddActivity(ActivityName: String) {
+        Log.d("Adding Activity", "hey");
+        if (userData!!.uid != null) {
+            val Activity = HashMap<String, Int>();
+            Activity.put(ActivityName, userData!!.activities.size)
+            Log.d("Adding Activity", Activity.toString());
+            userData!!.activities.add(Activity);
             db.collection("users")
                 .document(userData!!.uid!!).set(userData!!, SetOptions.merge())
         }
