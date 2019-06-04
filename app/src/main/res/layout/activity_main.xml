@@ -7,34 +7,12 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <fragment android:name="com.dthompson.timetap.ActivitiesFragment"
-              android:id="@+id/article_fragment"
-              android:layout_weight="2"
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintLeft_toLeftOf="parent"
-              app:layout_constraintRight_toRightOf="parent"
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:id="@+id/listgoeshere"
     />
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/text"/>
-    <Button
-            android:text="Log Event"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text"/>/>
+
     <Button
             android:text="Add New Event"
             android:layout_width="wrap_content"
@@ -43,6 +21,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button"/>/>
+            app:layout_constraintTop_toBottomOf="@id/listgoeshere"/>/>
 
 </android.support.constraint.ConstraintLayout>

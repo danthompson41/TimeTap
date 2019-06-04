@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ListFragment
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -29,7 +30,7 @@ class userdata {
 }
 
 class MainActivity : AppCompatActivity() {
-//    private val repo = Repository();
+    //    private val repo = Repository();
     private val db = FirebaseFirestore.getInstance()
     private val currentUser = HashMap<String, kotlin.Any>();
 
@@ -52,9 +53,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        button.setOnClickListener {
-            Repository.LogEvent("TestEvent2")
-        };
         addEventbutton.setOnClickListener {
             Log.d("EventButton", "EventButton")
             val intent = Intent(this, Add_Trackingactivity_Main::class.java)
@@ -71,7 +69,24 @@ class MainActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
                 val user = FirebaseAuth.getInstance().currentUser
+                Repository.getActivitiesNames().observe(this,
+                    android.arch.lifecycle.Observer { data ->
+                        Log.d("ObserverTest", "hey" + data.toString())
+                    })
                 Repository.LoadUser(user!!);
+
+                var ListFragment = TimeActivityListFragment()
+                ListFragment.setArguments(intent.extras)
+                // get the reference to the FragmentManger object
+                val fragManager = supportFragmentManager
+                // get the reference to the FragmentTransaction object
+                val transaction = fragManager.beginTransaction()
+                // add the fragment into the transaction
+                transaction.add(R.id.listgoeshere, ListFragment)
+                // commit the transaction.
+                transaction.commit()
+
+
             } else {
                 // Sign in failed. If response is null the user canceled the
                 // sign-in flow using the back button. Otherwise check

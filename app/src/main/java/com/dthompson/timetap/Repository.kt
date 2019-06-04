@@ -17,15 +17,16 @@ class dataModel() {
     val events = ArrayList<HashMap<String, kotlin.Any>>();
     val uid: String? = null;
     val activities = ArrayList<HashMap<String, Int>>();
+
 }
 
 object Repository {
-    //    val RC_SIGN_IN = 1
-    //    var userId : String? = null;
-    //    var events = ArrayList<HashMap<String, kotlin.Any>>();
     private var userData: dataModel? = null;
     private val currentUser = HashMap<String, kotlin.Any>();
     private val db = FirebaseFirestore.getInstance()
+    private val activityNames = MutableLiveData<MutableList<String>>();
+    private val activitiesNameList = mutableListOf<String>()
+
 
     public fun LoadUser(user: FirebaseUser) {
         if (user == null) {
@@ -61,11 +62,15 @@ object Repository {
                         userData = document.toObject(dataModel::class.java)
                         Log.d("USERDATAEVENTS", userData?.events.toString());
                         Log.d("USERDATAEVENTS", userData?.activities.toString());
+                        for (i in userData?.activities!!) {
+                            for ((k,v) in i) {
+                                activitiesNameList.add(k)
+                            }
+                        }
+                        activityNames.value = activitiesNameList;
 
                         if (newuser != null) {
-                            val eventsFromDb = newuser["events"];
                             Log.d("GET", "Events " + userData?.events);
-
                         }
                     } else {
                         Log.d("GET", "No such document")
@@ -89,29 +94,20 @@ object Repository {
     }
 
     public fun AddActivity(ActivityName: String) {
-        Log.d("Adding Activity", "hey");
         if (userData!!.uid != null) {
             val Activity = HashMap<String, Int>();
             Activity.put(ActivityName, userData!!.activities.size)
             Log.d("Adding Activity", Activity.toString());
             userData!!.activities.add(Activity);
+            activitiesNameList.add(ActivityName);
+            activityNames.value = activitiesNameList;
             db.collection("users")
                 .document(userData!!.uid!!).set(userData!!, SetOptions.merge())
         }
     }
+
+    public fun getActivitiesNames() : MutableLiveData<MutableList<String>> {
+        return activityNames;
+    }
 }
 
-
-//    private val users: MutableLiveData<List<User>> by lazy {
-//        MutableLiveData().also {
-//            loadUsers()
-//        }
-//    }
-//
-//    fun getUsers(): LiveData<List<User>> {
-//        return users
-//    }
-//
-//    private fun loadUsers() {
-//        // Do an asynchronous operation to fetch users.
-//    }

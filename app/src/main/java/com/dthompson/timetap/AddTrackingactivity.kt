@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.fragment_add_trackingactivity.*
  */
 class AddTrackingactivity : Fragment() {
 
-    private val db = FirebaseFirestore.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,14 +28,12 @@ class AddTrackingactivity : Fragment() {
         val view = inflater.inflate(R.layout.fragment_add_trackingactivity, container, false)
         val button = view.findViewById<Button>(R.id.fragment_addEventbutton)
         val name = view.findViewById<EditText>(R.id.fragment_addEventEditText)
-       button.setOnClickListener {
+        button.setOnClickListener {
             Log.d("ADDEVENTBUTTON", "Hit the button!")
             Log.d("ADDEVENTBUTTON", name.text.toString())
             Repository.AddActivity(name.text.toString())
             getActivity()!!.finish();
-       }
+        }
         return view;
     }
-
-
 }
