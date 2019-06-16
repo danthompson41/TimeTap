@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.support.v4.app.ListFragment
 import android.util.Log
 import android.view.View
@@ -57,9 +58,21 @@ class MainActivity : AppCompatActivity() {
             Log.d("EventButton", "EventButton")
             val intent = Intent(this, Add_Trackingactivity_Main::class.java)
             startActivity(intent);
+
         }
+
+
     }
 
+    fun logCalendar() {
+        val intent2: Intent = Intent(Intent.ACTION_INSERT)
+            .setData(CalendarContract.Events.CONTENT_URI)
+            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, Repository.getCurrentActivityStartTimeMillis())
+            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, Calendar.getInstance().getTime().time)
+            .putExtra(CalendarContract.Events.TITLE, Repository.getCurrentActivity().value)
+            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+        startActivityForResult(intent2, RESULT_OK)
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -76,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                 Repository.LoadUser(user!!);
 
                 var ListFragment = TimeActivityListFragment()
+                var CurrentActivityFragment = CurrentActivityDisplayFragment();
                 ListFragment.setArguments(intent.extras)
                 // get the reference to the FragmentManger object
                 val fragManager = supportFragmentManager
@@ -83,6 +97,7 @@ class MainActivity : AppCompatActivity() {
                 val transaction = fragManager.beginTransaction()
                 // add the fragment into the transaction
                 transaction.add(R.id.listgoeshere, ListFragment)
+                transaction.add(R.id.currentactivitygoeshere, CurrentActivityFragment);
                 // commit the transaction.
                 transaction.commit()
 

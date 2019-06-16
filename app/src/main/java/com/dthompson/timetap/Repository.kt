@@ -1,5 +1,6 @@
 package com.dthompson.timetap
 
+import android.app.PendingIntent.getActivity
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
@@ -10,6 +11,17 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import java.util.*
+import android.content.Intent
+import android.provider.CalendarContract.Events
+import android.provider.CalendarContract
+import android.support.v4.content.ContextCompat.startActivity
+
+
+class SingleEvent {
+    var name: String = "";
+    var start_time: Date = Date();
+
+}
 
 class dataModel() {
     val email: String? = null;
@@ -17,7 +29,7 @@ class dataModel() {
     val events = ArrayList<HashMap<String, kotlin.Any>>();
     val uid: String? = null;
     val activities = ArrayList<HashMap<String, Int>>();
-
+    val currentActivity = SingleEvent();
 }
 
 object Repository {
@@ -26,6 +38,8 @@ object Repository {
     private val db = FirebaseFirestore.getInstance()
     private val activityNames = MutableLiveData<MutableList<String>>();
     private val activitiesNameList = mutableListOf<String>()
+    private val currentActivity = MutableLiveData<String>();
+    private val currentActivityStartTime = MutableLiveData<Date>();
 
 
     public fun LoadUser(user: FirebaseUser) {
@@ -68,7 +82,8 @@ object Repository {
                             }
                         }
                         activityNames.value = activitiesNameList;
-
+                        currentActivity.value = userData!!.currentActivity.name;
+                        currentActivityStartTime.value = userData!!.currentActivity.start_time;
                         if (newuser != null) {
                             Log.d("GET", "Events " + userData?.events);
                         }
@@ -83,13 +98,23 @@ object Repository {
     }
     public fun LogEvent(eventName: String) {
         if (userData!!.uid != null) {
-            val logevent = HashMap<String, kotlin.Any>();
-            logevent.put("Event", eventName)
-            logevent.put("StartTime", Calendar.getInstance().getTime())
-            Log.d("BUTTONEVENT", logevent.toString());
-            userData!!.events.add(logevent);
-            db.collection("users")
-                .document(userData!!.uid!!).set(userData!!, SetOptions.merge())
+
+            if(eventName != currentActivity.value) {
+                val logevent = HashMap<String, kotlin.Any>()
+                logevent.put("Event", eventName)
+                logevent.put("StartTime", Calendar.getInstance().getTime())
+                Log.d("BUTTONEVENT", logevent.toString())
+                userData!!.events.add(logevent);
+
+
+                currentActivity.setValue(eventName);
+                userData!!.currentActivity.name = eventName;
+                userData!!.currentActivity.start_time = Calendar.getInstance().getTime()
+                currentActivityStartTime.setValue(Calendar.getInstance().getTime());
+                db.collection("users")
+                    .document(userData!!.uid!!).set(userData!!, SetOptions.merge())
+
+            }
         }
     }
 
@@ -108,6 +133,16 @@ object Repository {
 
     public fun getActivitiesNames() : MutableLiveData<MutableList<String>> {
         return activityNames;
+    }
+    public fun getCurrentActivity() : MutableLiveData<String> {
+        return currentActivity;
+    }
+    public fun getCurrentActivityStartTime() : MutableLiveData<Date> {
+        return currentActivityStartTime;
+    }
+
+    public fun getCurrentActivityStartTimeMillis() : Long {
+        return currentActivityStartTime.value!!.time;
     }
 }
 

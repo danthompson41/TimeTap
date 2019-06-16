@@ -1,11 +1,15 @@
 package com.dthompson.timetap
 
 import android.app.Activity
+import android.app.PendingIntent.getActivity
 import android.arch.lifecycle.Observer
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.text.Layout
 import android.util.Log
@@ -15,6 +19,8 @@ import android.view.ViewGroup
 import android.widget.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import java.security.AccessController.getContext
+import java.util.*
 import java.util.zip.Inflater
 
 //import android.R
@@ -31,10 +37,12 @@ import java.util.zip.Inflater
  */
 class TimeActivityListFragment : Fragment() {
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var mainActivity: MainActivity = activity as MainActivity
         val view = inflater.inflate(R.layout.fragment_time_activity_list, container, false)
         val list = view.findViewById<ListView>(R.id.listview)
         var thingstoadd: MutableList<String>
@@ -42,20 +50,23 @@ class TimeActivityListFragment : Fragment() {
             android.arch.lifecycle.Observer { data ->
                 Log.d("ObserverFromFragment", data.toString())
                 thingstoadd = data!!
-                val adapter = MyListAdapter(inflater, thingstoadd)
+                val adapter = MyListAdapter(inflater, thingstoadd, mainActivity)
                 list.adapter = adapter;
             })
         return view
     }
 }
 
-class MyListAdapter(private var inflater: LayoutInflater, private var items: MutableList<String>) : BaseAdapter() {
+class MyListAdapter(private var inflater: LayoutInflater, private var items: MutableList<String>, private var mainActivity: MainActivity) : BaseAdapter() {
+
     private class ViewHolder(row: View?) {
         var button: Button? = null
+        var mainActivity: MainActivity? = null;
 
         init {
             this.button = row?.findViewById(R.id.singletimeactivitybutton)
             button?.setOnClickListener {
+                mainActivity?.logCalendar();
                 Repository.LogEvent(button!!.text.toString())
             }
         }
@@ -74,6 +85,7 @@ class MyListAdapter(private var inflater: LayoutInflater, private var items: Mut
         }
         var item = items[position]
         viewHolder.button?.text = item;
+        viewHolder.mainActivity = mainActivity
 
         return view as View
     }

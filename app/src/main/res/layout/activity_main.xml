@@ -9,8 +9,16 @@
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="400dp"
             android:id="@+id/listgoeshere"
+            app:layout_constraintTop_toTopOf="parent"
+    />
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/currentactivitygoeshere"
+            app:layout_constraintTop_toBottomOf="@id/listgoeshere"
     />
 
     <Button
@@ -21,6 +29,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/listgoeshere"/>/>
+            app:layout_constraintTop_toBottomOf="@id/currentactivitygoeshere"
+    />
 
 </android.support.constraint.ConstraintLayout>
