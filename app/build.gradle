@@ -22,6 +22,10 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -36,6 +40,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+
 
 }
 

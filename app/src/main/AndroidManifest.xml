@@ -4,8 +4,10 @@
           package="com.dthompson.timetap">
 
     <dist:module dist:instant="true"/>
+
     <uses-permission android:name="android.permission.READ_CALENDAR"/>
     <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -13,6 +15,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity
+                android:name=".WeekHistogramActivity"
+                android:label="@string/title_activity_week_histogram"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
                 android:name=".Add_Trackingactivity_Main"
                 android:label="@string/title_activity_add__tracking_main"

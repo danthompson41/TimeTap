@@ -60,7 +60,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent);
 
         }
+        weeklyStatButton.setOnClickListener {
+            Log.d("HistogramButton", "HistogramButton")
+            val intent = Intent(this, WeekHistogramActivity::class.java)
+            startActivity(intent);
 
+        }
 
     }
 
