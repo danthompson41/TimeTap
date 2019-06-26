@@ -23,7 +23,6 @@
             android:text="Save Event"
             android:id="@+id/fragment_addEventbutton"
     />
-
 </LinearLayout>
 
 <!--</FrameLayout>-->

@@ -32,7 +32,7 @@ class AddTrackingactivity : Fragment() {
             Log.d("ADDEVENTBUTTON", "Hit the button!")
             Log.d("ADDEVENTBUTTON", name.text.toString())
             Repository.AddActivity(name.text.toString())
-            getActivity()!!.finish();
+            (activity as MainActivity).notify_activity_add()
         }
         return view;
     }

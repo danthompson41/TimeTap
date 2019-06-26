@@ -52,6 +52,9 @@ class TimeActivityListFragment : Fragment() {
                 thingstoadd = data!!
                 val adapter = MyListAdapter(inflater, thingstoadd, mainActivity)
                 list.adapter = adapter;
+                if (thingstoadd.size == 0) {
+                    mainActivity.replaceFragment(AddTrackingactivity())
+                }
             })
         return view
     }

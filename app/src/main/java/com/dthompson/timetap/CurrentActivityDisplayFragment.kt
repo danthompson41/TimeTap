@@ -55,7 +55,11 @@ class CurrentActivityDisplayFragment : Fragment() {
         val diff = Calendar.getInstance().time.time - currentActivityStart.time
         val minutes = TimeUnit.MILLISECONDS.toMinutes(diff)
         val seconds = TimeUnit.MILLISECONDS.toSeconds(diff) - (60 * minutes)
-        currentActivityDuration.text = minutes.toString() + " Minutes, " + seconds.toString() + " Seconds";
+        if (Repository.getCurrentActivity().value == "") {
+            currentActivityDuration.text = ""
+        } else {
+            currentActivityDuration.text = minutes.toString() + " Minutes, " + seconds.toString() + " Seconds";
+        }
         handler.postDelayed({
             update();
         }, 1000)

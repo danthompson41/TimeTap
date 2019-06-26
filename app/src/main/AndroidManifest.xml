@@ -7,6 +7,13 @@
 
     <uses-permission android:name="android.permission.READ_CALENDAR"/>
     <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature
+            android:name="android.hardware.bluetooth_le"
+            android:required="true" />
 
     <application
             android:allowBackup="true"
@@ -15,11 +22,6 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity
-                android:name=".WeekHistogramActivity"
-                android:label="@string/title_activity_week_histogram"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity
                 android:name=".Add_Trackingactivity_Main"
                 android:label="@string/title_activity_add__tracking_main"
@@ -32,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <service android:name="com.np.lekotlin.blemodule.BLEService"></service>
     </application>
 
 </manifest>

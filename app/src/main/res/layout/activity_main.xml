@@ -9,35 +9,31 @@
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:id="@+id/listgoeshere"
+            android:layout_height="100dp"
+            android:id="@+id/currentactivitygoeshere"
             app:layout_constraintTop_toTopOf="parent"
+
     />
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:id="@+id/currentactivitygoeshere"
-            app:layout_constraintTop_toBottomOf="@id/listgoeshere"
+            android:layout_height="400dp"
+            android:id="@+id/mainContentGoesHere"
+            app:layout_constraintTop_toBottomOf="@id/currentactivitygoeshere"
+
     />
 
-    <Button
-            android:text="Add New Event"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addEventbutton"
+    <android.support.design.widget.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark"
+            app:menu="@menu/bottom_nav_menu"
+            android:id="@+id/bottomNav"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/currentactivitygoeshere"
-    />
-    <Button
-            android:text="Display Weekly Stats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/weeklyStatButton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/addEventbutton"
-            app:layout_constraintTop_toBottomOf="@id/currentactivitygoeshere"
-    />
+            app:labelVisibilityMode="labeled"
+            app:itemTextColor="@color/colorPrimary"
+    >
+
+    </android.support.design.widget.BottomNavigationView>
 
 </android.support.constraint.ConstraintLayout>

@@ -48,7 +48,7 @@ object Repository {
     private var EventsListWeek = mutableListOf<SingleEvent>()
     private val WeekHistogram = MutableLiveData<HashMap<String,Long>>()
     private val DayTimeSeries = MutableLiveData<HashMap<String,Long>>()
-
+    var mDeviceAddress: String = ""
 
     public fun LoadUser(user: FirebaseUser) {
         if (user == null) {
@@ -117,10 +117,6 @@ object Repository {
         if (userData!!.uid != null) {
 
             if(eventName != currentActivity.value) {
-//                val logevent = HashMap<String, kotlin.Any>()
-//                logevent.put("Event", eventName)
-//                logevent.put("StartTime", Calendar.getInstance().getTime())
-//                Log.d("BUTTONEVENT", logevent.toString())
                 val logevent = SingleEvent();
                 logevent.start_time = Calendar.getInstance().getTime();
                 logevent.name = eventName;
